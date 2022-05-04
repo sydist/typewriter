@@ -1,2 +1,2 @@
 # gamemaker-typewriter
-Useful GameMaker utility scripts I've made over the years.
+A typewriter engine for GameMaker, creates every character seprately to give a talking effect.
