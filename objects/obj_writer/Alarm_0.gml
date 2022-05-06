@@ -5,7 +5,7 @@ progress++;
 var _char = string_copy(message, progress, 1);
 var _charCode = ord(_char);
 
-if (_charCode > 32 && _charCode < 127) {
+if (_charCode > 32) {
 	if (shake != 0) var _inst = instance_create_depth(x + xOffset, y + yOffset, depth, obj_letter_shake);
 	else if (wave != 0) var _inst = instance_create_depth(x + xOffset, y + yOffset, depth, obj_letter_wave);
 	else var _inst = instance_create_depth(x + xOffset, y + yOffset, depth, obj_letter_normal);
@@ -31,14 +31,10 @@ if (_charCode > 32 && _charCode < 127) {
 	if (sound != undefined) audio_play_sound(sound, 0, false);
 }
 
-var _cos = dcos(angle);
-var _sin = dsin(angle);
-
 draw_set_font(font);
-xOffset += (((string_width(_char) * xScale) * !monoSpace) + (hSep * xScale)) * _cos;
-yOffset += (((string_height(_char) * yScale) * !monoSpace) + (vSep * yScale)) * -_sin;
+xOffset += (((string_width(_char) * xScale) * !monoSpace) + (hSep * xScale)) * dcos(angle)
+yOffset += (((string_height(_char) * yScale) * !monoSpace) + (vSep * yScale)) * -dsin(angle)
 
 commandCheck();
-
 isOver = (progress >= length);
 

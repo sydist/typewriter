@@ -1,44 +1,8 @@
 
-#region INIT
-
-pages = []
-page = 0;
-message = "";
-length = 0;
-spd = 3;
-progress = 0;
-sound = v_default;
-font = global.FNT_8BITOPERATOR_JVE.font;
-sprite = global.FNT_8BITOPERATOR_JVE.sprite;
-isOver = false;
-
-monoSpace = false;
-xOffset = 0;
-yOffset = 0;
-hSep = 0;
-vSep = 0;
-angle = 0;
-nlAngle = 270;
-pause = 0;
-functions = [];
-endFunction = function(){};
-canSkip = true;
-canContinue = true;
-
-xScale = 1;
-yScale = 1;
-charOpacity = 1;
-shake = 0;
-wave = 0;
-charAngle = 0;
-color = #ffffff
+#region COMMANDS
 
 commandsQueue = ds_queue_create();
 commands = ds_map_create();
-
-#endregion
-
-#region COMMANDS
 
 var c = commands;
 
@@ -105,7 +69,6 @@ function queueCommands() {
 		var _cmd = string_copy(message, _start + 1, 1);
 		if (_cmd == CMD_START) { 
 			message = string_delete(message, _start + 1, 1); 
-			length--; 
 			_index = _start;
 			continue;
 		}
@@ -118,7 +81,6 @@ function queueCommands() {
 		ds_queue_enqueue(commandsQueue, [_start, _cmd, _input]);
 		
 		message = string_delete(message, _start, _length);
-		length -= _length;
 	}
 }
 
@@ -141,6 +103,50 @@ function getInput() {
 function bgr(c) {
     return ((c >> 16) & 0xFF) | (c & 0xFF00) | ((c << 16) &  0xFF0000);
 }
+
+#endregion
+
+#region INIT
+
+pages = args.pages
+page = args.page;
+message = pages[page];
+spd = args.spd;
+
+sound = args.sound;
+font = args.font;
+sprite = args.sprite;
+
+monoSpace = args.monoSpace;
+hSep = args.hsep;
+vSep = args.vsep;
+xScale = args.xscale;
+yScale = args.yscale;
+
+functions = args.functions;
+endFunction = args.endFunction;
+
+progress = 0;
+xOffset = 0;
+yOffset = 0;
+
+angle = 0;
+nlAngle = 270;
+charAngle = 0;
+
+canSkip = true;
+canContinue = true;
+isOver = false;
+
+pause = 0;
+shake = 0;
+wave = 0;
+color = #ffffff;
+charOpacity = 1;
+
+queueCommands();
+length = string_length(message);
+commandCheck();
 
 #endregion
 

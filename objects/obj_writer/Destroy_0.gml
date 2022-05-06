@@ -5,5 +5,4 @@ with(par_letter)
 		instance_destroy();
 
 ds_queue_destroy(commandsQueue);
-ds_map_destroy(commands);
 	

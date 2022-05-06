@@ -6,7 +6,7 @@
     "path": "Typewriter.yyp",
   },
   "resourceVersion": "1.0",
-  "name": "_macros",
+  "name": "instance_create",
   "tags": [],
   "resourceType": "GMScript",
 }
