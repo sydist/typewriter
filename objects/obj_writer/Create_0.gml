@@ -4,37 +4,39 @@
 commandsQueue = ds_queue_create();
 commands = ds_map_create();
 
-var c = commands;
-
-ds_map_set(c, "!", function() { functions[real(getInput())]()});
-
-ds_map_set(c, "g", function() { nlAngle= real(getInput())});
-
-ds_map_set(c, "p", function() { pause = real(getInput())});
-
-ds_map_set(c, "a", function() { angle = real(getInput())});
-
-ds_map_set(c, "s", function() { shake = real(getInput())});
-
-ds_map_set(c, "w", function() { wave = real(getInput())});
-
-ds_map_set(c, "t", function() { spd = real(getInput())});
-
-ds_map_set(c, "c", function() { color = bgr(real("0x" + getInput())) });
-
-
-ds_map_set(c, "f", function() { 
+commands[? ">"] = function() { // Function
+	functions[real(getInput())]()
+};
+commands[? "p"] = function() { // Pause
+	pause = real(getInput())
+};
+commands[? "a"] = function() { // Angle
+	angle = real(getInput())
+	nlAngle = angle + 270;
+};
+commands[? "s"] = function() { // Shake
+	shake = real(getInput())
+};
+commands[? "w"] = function() { // Wave
+	wave = real(getInput())
+};
+commands[? "t"] = function() { // Speed
+	spd = real(getInput())
+};
+commands[? "c"] = function() { // Color
+	var c = real("0x" + getInput());
+	return ((c >> 16) & 0xFF) | (c & 0xFF00) | ((c << 16) &  0xFF0000);
+};
+commands[? "f"] = function() { // Font
 	var f = variable_global_get(getInput())
 	font = f.font;
 	sprite = f.sprite;
-});
-
-ds_map_set(c, "x", function() { 
+};
+commands[? "x"] = function() { // Scale
 	xScale = real(getInput())
 	yScale = real(getInput())
-});
-
-ds_map_set(c, "n", function() {
+};
+commands[? "n"] = function() { // New Line
 	var _indent = getInput();
 	var _indentLength = string_length(_indent);
 	
@@ -52,7 +54,7 @@ ds_map_set(c, "n", function() {
 	
 	xOffset = ((xOffset + (string_width("0")  * _xScaleMono) + _hsep) * _cosNlAngle) + (((string_width(_indent) * _xScaleMono) + (_indentLength * _hsep)) * _cosAngle);
 	yOffset = ((yOffset + (string_height("0") * _yScaleMono) + _vsep) * -_sinNlAngle) + (((string_height(_indent) * _indentLength * _yScaleMono) + (_indentLength * _vsep)) * -_sinAngle);
-});
+};
 
 #endregion
 
@@ -83,25 +85,19 @@ function queueCommands() {
 		message = string_delete(message, _start, _length);
 	}
 }
-
 function commandCheck() {
 	if (ds_queue_empty(commandsQueue)) exit;
 
-	var _head = ds_queue_head(commandsQueue);
-	if ((progress + 1) != _head[0]) exit;
-	
-	commands[? _head[1]]();
+	head = ds_queue_head(commandsQueue);
+	if ((progress + 1) != head[0]) exit;
+
+	commands[? head[1]]();
 	ds_queue_dequeue(commandsQueue);
-	
+
 	commandCheck();
 }
-
 function getInput() {
-	return ds_queue_head(commandsQueue)[2];	
-}
-
-function bgr(c) {
-    return ((c >> 16) & 0xFF) | (c & 0xFF00) | ((c << 16) &  0xFF0000);
+	return head[2];	
 }
 
 #endregion
@@ -145,8 +141,9 @@ color = #ffffff;
 charOpacity = 1;
 
 queueCommands();
-length = string_length(message);
 commandCheck();
+
+length = string_length(message);
 
 #endregion
 
