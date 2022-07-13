@@ -1,1 +1,3 @@
-write(10, 30, [ "Hello [s1]World!"], 3, global.FNT_8BITOPERATOR_JVE, v_default, c_white)
+show_debug_overlay(true);
+
+write(10, 30, [ "Hello [s1]World!, I [[w1]love worlds!", "LmaoLmaoLmaoLmaoLmaoLmaoLmaoLmaoLmaoLmaoLmaoLmaov" ], 3, global.FONTS.main, v_default, c_white)

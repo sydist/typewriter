@@ -1,4 +1,3 @@
-
 pause = 0;
 progress++;
 
@@ -6,10 +5,8 @@ var _char = string_copy(message, progress, 1);
 var _charCode = ord(_char);
 
 if (_charCode > 32) {
-	if (shake != 0) var _inst = instance_create_depth(x + xOffset, y + yOffset, depth, obj_letter_shake);
-	else if (wave != 0) var _inst = instance_create_depth(x + xOffset, y + yOffset, depth, obj_letter_wave);
-	else var _inst = instance_create_depth(x + xOffset, y + yOffset, depth, obj_letter_normal);
-	
+	var _inst = instance_create_depth(x + xOffset, y + yOffset, depth, asset_get_index("obj_letter_" + effect));
+
 	with(_inst) {
 		writerX = other.x;
 		writerY = other.y;
@@ -20,8 +17,8 @@ if (_charCode > 32) {
 		wave = other.wave;
 		index = other.progress;
 		image_angle	= other.charAngle;
-		image_xscale = other.xScale;
-		image_yscale = other.yScale;
+		image_xscale = other.xscale;
+		image_yscale = other.yscale;
 		image_alpha	= other.charOpacity;
 		image_blend	= other.color;
 		sprite_index = other.sprite;	
@@ -32,9 +29,18 @@ if (_charCode > 32) {
 }
 
 draw_set_font(font);
-xOffset += (((string_width(_char) * xScale) * !monoSpace) + (hSep * xScale)) * dcos(angle)
-yOffset += (((string_height(_char) * yScale) * !monoSpace) + (vSep * yScale)) * -dsin(angle)
+xOffset += (((string_width(_char) * xscale) * !monospace) + (hsep * xscale)) * dcos(angle)
+yOffset += (((string_height(_char) * yscale) * !monospace) + (vsep * yscale)) * -dsin(angle)
 
 commandCheck();
-isOver = (progress >= length);
 
+isOver = (progress >= length);
+if (isOver)
+{	
+	if (!canContinue) return;
+	alarm[1] = 1;
+	
+	return;
+}
+
+alarm[0] = spd + pause;

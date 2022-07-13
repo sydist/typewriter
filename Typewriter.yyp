@@ -2,15 +2,12 @@
   "resources": [
     {"id":{"name":"obj_letter_normal","path":"objects/obj_letter_normal/obj_letter_normal.yy",},"order":2,},
     {"id":{"name":"v_default","path":"sounds/v_default/v_default.yy",},"order":1,},
-    {"id":{"name":"obj_blank","path":"objects/obj_blank/obj_blank.yy",},"order":5,},
     {"id":{"name":"par_letter","path":"objects/par_letter/par_letter.yy",},"order":5,},
-    {"id":{"name":"instance_create","path":"scripts/instance_create/instance_create.yy",},"order":3,},
     {"id":{"name":"GAME","path":"rooms/GAME/GAME.yy",},"order":2,},
     {"id":{"name":"spr_8BitoperatorJVE","path":"sprites/spr_8BitoperatorJVE/spr_8BitoperatorJVE.yy",},"order":0,},
     {"id":{"name":"obj_letter_wave","path":"objects/obj_letter_wave/obj_letter_wave.yy",},"order":4,},
     {"id":{"name":"write","path":"scripts/write/write.yy",},"order":2,},
     {"id":{"name":"obj_letter_shake","path":"objects/obj_letter_shake/obj_letter_shake.yy",},"order":3,},
-    {"id":{"name":"_init","path":"scripts/_init/_init.yy",},"order":4,},
     {"id":{"name":"obj_writer","path":"objects/obj_writer/obj_writer.yy",},"order":0,},
   ],
   "Options": [
@@ -40,7 +37,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2022.3.0.625",
+    "IDEVersion": "2022.6.0.23",
   },
   "resourceVersion": "1.5",
   "name": "Typewriter",
