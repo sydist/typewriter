@@ -1,5 +1,6 @@
 {
   "resources": [
+    {"id":{"name":"Font","path":"scripts/Font/Font.yy",},"order":4,},
     {"id":{"name":"obj_letter_normal","path":"objects/obj_letter_normal/obj_letter_normal.yy",},"order":2,},
     {"id":{"name":"v_default","path":"sounds/v_default/v_default.yy",},"order":1,},
     {"id":{"name":"par_letter","path":"objects/par_letter/par_letter.yy",},"order":5,},

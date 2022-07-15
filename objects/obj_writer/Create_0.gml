@@ -128,3 +128,5 @@ commandCheck();
 
 isLast = (page >= array_length(pages) - 1);
 length = string_length(message);
+
+alarm[0] = spd + pause;
