@@ -1,11 +1,15 @@
+/// @desc Next Letter
+
 pause = 0;
 progress++;
 
 var _char = string_copy(message, progress, 1);
 var _charCode = ord(_char);
 
-if (_charCode > 32) {
-	instance_create_depth(x + xOffset, y + yOffset, depth, asset_get_index("obj_letter_" + effect), {
+if (_charCode > 32) 
+{
+	instance_create_depth(x + xOffset, y + yOffset, depth, asset_get_index("obj_letter_" + effect), 
+	{
 		writerX: other.x,
 		writerY: other.y,
 		xOffset: other.xOffset,
@@ -23,7 +27,8 @@ if (_charCode > 32) {
 		image_index: string_pos(_char, ASCII) - 1,	
 	});
 	
-	audio_play_sound(sound, 0, false);
+	if (sound != noone) 
+		audio_play_sound(sound, 0, false);
 }
 
 draw_set_font(font);
@@ -33,12 +38,11 @@ yOffset += (((string_height(_char) * yscale) * !monospace) + (vsep * yscale)) * 
 commandCheck();
 
 isOver = (progress >= length);
-if (isOver)
+if (isOver && canContinue)
 {	
-	if (!canContinue) return;
 	alarm[1] = 1;
-	
-	return;
+	alarm[2] = -1;
+	exit;
 }
 
 alarm[0] = spd + pause;

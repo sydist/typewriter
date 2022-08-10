@@ -116,7 +116,23 @@ function setPos(_x, _y) {
 }
 function next() {
 	instance_destroy();
+	if (isLast) exit;
 	write(x, y, pages, spd, fontstruct, sound, color, [xscale, yscale], [hsep, vsep,], monospace, functions, endfunction, page + 1, depth)
+}
+function skip() {
+	pause = 0;
+	alarm[0] = 0;
+	
+	repeat(length - progress) 
+		event_perform(ev_alarm, 0);
+		
+	if (sound != noone) 
+	{
+		audio_stop_sound(sound);
+		audio_play_sound(sound, 0, false);
+	}
+	
+	isOver = true;
 }
 
 #endregion
@@ -128,5 +144,7 @@ commandCheck();
 
 isLast = (page >= array_length(pages) - 1);
 length = string_length(message);
-
+	
 alarm[0] = spd + pause;
+alarm[1] = -1;
+alarm[2] = -1 + (2 * canSkip);
