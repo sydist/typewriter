@@ -116,7 +116,19 @@ function setPos(_x, _y) {
 }
 function next() {
 	instance_destroy();
-	if (isLast) exit;
+	
+	with(par_letter)
+		if (writerId == other.id)
+			instance_destroy();
+
+	ds_queue_destroy(commandsQueue);
+	
+	if (isLast)
+	{
+		endfunction();
+		exit;
+	}
+		
 	write(x, y, pages, spd, fontstruct, sound, color, [xscale, yscale], [hsep, vsep,], monospace, functions, endfunction, page + 1, depth)
 }
 function skip() {
