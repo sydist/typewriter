@@ -64,24 +64,30 @@ commands[? "n"] = function() { // New Line
 
 #region FUNCTIONS
 
-function queueCommands() {
+function queueCommands() 
+{
 	var _count = string_count(CMD_START, message);
-	if (_count == 0) exit;
-	
 	var _index = 0;
-	repeat(_count) {
+	
+	var i = 0;
+	while(i < _count)
+	{
 		var _start = string_pos_ext(CMD_START, message, _index);
-		if (_start == 0) exit;
-
 		var _cmd = string_copy(message, _start + 1, 1);
-		if (_cmd == CMD_START) { 
-			message = string_delete(message, _start + 1, 1); 
-			_index = _start;
+		_index = _start - 1;
+		
+		i++;
+		if (!ds_map_exists(commands, _cmd))
+		{
+			if (_cmd == CMD_START)
+			{
+				message = string_delete(message, _start, 1);
+				i++;
+			}
+			_index++
 			continue;
 		}
 		
-		if (!ds_map_exists(commands, _cmd)) continue;
-
 		var _length = string_pos_ext(CMD_BREAK, message, _start + 1) - _start + 1;
 		var _input = string_copy(message, _start + 2, _length - 3);
 		
@@ -91,15 +97,16 @@ function queueCommands() {
 	}
 }
 function commandCheck() {
-	if (ds_queue_empty(commandsQueue)) exit;
+	repeat(2)
+	{
+		if (ds_queue_empty(commandsQueue)) exit;
 
-	head = ds_queue_head(commandsQueue);
-	if ((progress + 1) != head[0]) exit;
+		head = ds_queue_head(commandsQueue);
+		if ((progress + 1) != head[0]) exit;
 
-	commands[? head[1]]();
-	ds_queue_dequeue(commandsQueue);
-
-	commandCheck();
+		commands[? head[1]]();
+		ds_queue_dequeue(commandsQueue);	
+	}
 }
 function getInput() {
 	return head[2];	
