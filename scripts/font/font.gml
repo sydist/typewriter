@@ -10,3 +10,6 @@ function Font(_sprite, _prop, _sep, _charmap = ASCII) constructor {
 global.FONTS = {
 	main: new Font(spr_8BitoperatorJVE, true, 1),
 };
+
+// put this in the game end event of your game object
+// delete global.FONTS
