@@ -3,45 +3,58 @@
 commandsQueue = ds_queue_create();
 commands = ds_map_create();
 
-commands[? ">"] = function() { // Function
-	functions[real(getInput())]();
+commands[? ">"] = function(_value) // Function
+{ 
+	functions[real(_value)]();
 };
-commands[? "p"] = function() { // Pause
-	pause = real(getInput());
+commands[? "p"] = function(_value) // Pause
+{ 
+	pause = real(_value);
 };
-commands[? "a"] = function() { // Angle
-	angle = real(getInput());
+commands[? "a"] = function(_value) // Angle
+{ 
+	angle = real(_value);
 	nlAngle = angle + 270;
 };
-commands[? "r"] = function() { // Reset Effects
+commands[? "r"] = function(_value) // Reset Effects
+{ 
+	show_debug_message("NORMAL")
 	effect = "normal";
 };
-commands[? "s"] = function() { // Shake Effect
+commands[? "s"] = function(_value) // Shake Effect
+{ 
 	effect = "shake";
-	shake = real(getInput());
+	shake = real(_value);
 };
-commands[? "w"] = function() { // Wave Effect
+commands[? "w"] = function(_value) // Wave Effect
+{ 
+	show_debug_message("WAVE")
 	effect = "wave";
-	wave = real(getInput());
+	wave = real(_value);
 };
-commands[? "t"] = function() { // Speed
-	spd = real(getInput());
+commands[? "t"] = function(_value) // Speed
+{ 
+	spd = real(_value);
 };
-commands[? "c"] = function() { // Color
-	var c = real("0x" + getInput());
+commands[? "c"] = function(_value) // Color
+{ 
+	var c = real("0x" + _value);
 	return ((c >> 16) & 0xFF) | (c & 0xFF00) | ((c << 16) &  0xFF0000);
 };
-commands[? "f"] = function() { // Font
-	var f = variable_global_get(getInput());
+commands[? "f"] = function(_value) // Font
+{ 
+	var f = variable_global_get(_value);
 	font = f.font;
 	sprite = f.sprite;
 };
-commands[? "x"] = function() { // Scale
-	xscale = real(getInput());
-	yscale = real(getInput());
+commands[? "x"] = function(_value) // Scale
+{ 
+	xscale = real(_value);
+	yscale = real(_value);
 };
-commands[? "n"] = function() { // New Line
-	var _indent = getInput();
+commands[? "n"] = function(_value) // New Line
+{ 
+	var _indent = _value;
 	var _indentLength = string_length(_indent);
 	
 	var _hsep = hsep * xscale;
@@ -67,51 +80,52 @@ commands[? "n"] = function() { // New Line
 function queueCommands() 
 {
 	var _count = string_count(CMD_START, message);
-	var _index = 0;
+	var _startPos = 0;
 	
 	var i = 0;
 	while(i < _count)
 	{
-		var _start = string_pos_ext(CMD_START, message, _index);
-		var _cmd = string_copy(message, _start + 1, 1);
-		_index = _start - 1;
+		var _cmdStart = string_pos_ext(CMD_START, message, _startPos);
+		var _cmd = string_copy(message, _cmdStart + 1, 1);
+		_startPos = _cmdStart - 1;
 		
 		i++;
 		if (!ds_map_exists(commands, _cmd))
 		{
 			if (_cmd == CMD_START)
 			{
-				message = string_delete(message, _start, 1);
+				message = string_delete(message, _cmdStart, 1);
 				i++;
 			}
-			_index++
+			_startPos++
 			continue;
 		}
 		
-		var _length = string_pos_ext(CMD_BREAK, message, _start + 1) - _start + 1;
-		var _input = string_copy(message, _start + 2, _length - 3);
+		var _length = string_pos_ext(CMD_BREAK, message, _cmdStart + 1) - _cmdStart + 1;
+		var _input = string_copy(message, _cmdStart + 2, _length - 3);
 		
-		ds_queue_enqueue(commandsQueue, [_start, _cmd, _input]);
+		ds_queue_enqueue(commandsQueue, { pos: _cmdStart, name: _cmd, value: _input });
 		
-		message = string_delete(message, _start, _length);
+		message = string_delete(message, _cmdStart, _length);
 	}
 }
-function commandCheck() {
-	repeat(2)
+function commandCheck() 
+{
+	while (true)
 	{
-		if (ds_queue_empty(commandsQueue)) exit;
-
+		if (ds_queue_empty(commandsQueue)) 
+			return;
+		
 		head = ds_queue_head(commandsQueue);
-		if ((progress + 1) != head[0]) exit;
-
-		commands[? head[1]]();
+		if ((progress + 1) != head.pos) 
+			return;
+		
+		commands[? head.name](head.value);
 		ds_queue_dequeue(commandsQueue);	
 	}
 }
-function getInput() {
-	return head[2];	
-}
-function setPos(_x, _y) {
+function setPos(_x, _y) 
+{
 	x = _x;
 	y = _y;
 	with(par_letter) {
@@ -121,7 +135,8 @@ function setPos(_x, _y) {
 		y = writerY + yOffset;	
 	}
 }
-function next() {
+function next() 
+{
 	instance_destroy();
 	
 	with(par_letter)
@@ -133,12 +148,13 @@ function next() {
 	if (isLast)
 	{
 		endfunction();
-		exit;
+		return;
 	}
 		
 	write(x, y, pages, spd, fontstruct, sound, color, [xscale, yscale], [hsep, vsep,], monospace, functions, endfunction, page + 1, depth)
 }
-function skip() {
+function skip() 
+{
 	pause = 0;
 	alarm[0] = 0;
 	

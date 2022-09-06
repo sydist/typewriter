@@ -1,3 +1,5 @@
-var _time = .01 * current_time;
-x = (writerX + xOffset) + ( wave * cos( _time + (index * .18) ));
-y = (writerY + yOffset) + ( wave *-sin( _time + (index * .18) ));
+var _time = current_time / 100;
+var _variation = index / 5;
+
+x = (writerX + xOffset) + (wave *  cos(_time + _variation));
+y = (writerY + yOffset) + (wave * -sin(_time + _variation));
