@@ -27,8 +27,8 @@ if (_charCode > 32)
 		image_index: string_pos(_char, ASCII) - 1,	
 	});
 	
-	if (sound != noone) 
-		audio_play_sound(sound, 0, false);
+	
+	audio_play_sound(sound ?? snd_nothing, 0, false);
 }
 
 draw_set_font(font);

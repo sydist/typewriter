@@ -18,7 +18,6 @@ commands[? "a"] = function(_value) // Angle
 };
 commands[? "r"] = function(_value) // Reset Effects
 { 
-	show_debug_message("NORMAL")
 	effect = "normal";
 };
 commands[? "s"] = function(_value) // Shake Effect
@@ -28,7 +27,6 @@ commands[? "s"] = function(_value) // Shake Effect
 };
 commands[? "w"] = function(_value) // Wave Effect
 { 
-	show_debug_message("WAVE")
 	effect = "wave";
 	wave = real(_value);
 };
@@ -161,11 +159,8 @@ function skip()
 	repeat(length - progress) 
 		event_perform(ev_alarm, 0);
 		
-	if (sound != noone) 
-	{
-		audio_stop_sound(sound);
-		audio_play_sound(sound, 0, false);
-	}
+	audio_stop_sound(sound ?? snd_nothing);
+	audio_play_sound(sound ?? snd_nothing, 0, false);
 	
 	isOver = true;
 }
