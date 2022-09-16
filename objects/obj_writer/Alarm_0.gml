@@ -28,7 +28,7 @@ if (_charCode > 32)
 	});
 	
 	
-	audio_play_sound(sound ?? snd_nothing, 0, false);
+	audio_play_sound(sound, 0, false);
 }
 
 draw_set_font(font);

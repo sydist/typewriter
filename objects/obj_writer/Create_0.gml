@@ -159,8 +159,8 @@ function skip()
 	repeat(length - progress) 
 		event_perform(ev_alarm, 0);
 		
-	audio_stop_sound(sound ?? snd_nothing);
-	audio_play_sound(sound ?? snd_nothing, 0, false);
+	audio_stop_sound(sound);
+	audio_play_sound(sound, 0, false);
 	
 	isOver = true;
 }

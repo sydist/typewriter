@@ -10,7 +10,7 @@ function write(_x, _y, _str, _spd, _fnt, _snd, _clr = 0xffffff, _xyscale = [1, 1
 		hsep: _hvsep[0],
 		vsep: _hvsep[1],
 		
-		sound: _snd,
+		sound: _snd ?? snd_nothing,
 		fontstruct: _fnt,
 		font: _fnt.font,
 		sprite: _fnt.sprite,
@@ -20,3 +20,17 @@ function write(_x, _y, _str, _spd, _fnt, _snd, _clr = 0xffffff, _xyscale = [1, 1
 		endfunction: _endfunc,
 	});
 }
+
+#macro CMD_START "["
+#macro CMD_BREAK "]"
+#macro ASCII " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
+
+function Font(_sprite, _prop, _sep, _charmap = ASCII) constructor 
+{
+	font = font_add_sprite_ext(_sprite, _charmap, _prop, _sep);
+	sprite = _sprite;
+}
+
+global.FONTS = {
+	main: new Font(spr_8BitoperatorJVE, true, 1),
+};
