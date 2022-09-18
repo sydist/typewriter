@@ -38,7 +38,7 @@ yOffset += (((string_height(_char) * yscale) * !monospace) + (vsep * yscale)) * 
 commandCheck();
 
 isOver = (progress >= length);
-if (isOver && canContinue)
+if (isOver)
 {	
 	alarm[1] = 1;
 	alarm[2] = -1;

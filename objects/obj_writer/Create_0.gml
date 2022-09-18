@@ -1,56 +1,56 @@
 #region COMMANDS
 
 commandsQueue = ds_queue_create();
-commands = ds_map_create();
+commands = {};
 
-commands[? ">"] = function(_value) // Function
+commands[$ ">"] = function(_value) // Function
 { 
 	functions[real(_value)]();
 };
-commands[? "p"] = function(_value) // Pause
+commands[$ "p"] = function(_value) // Pause
 { 
 	pause = real(_value);
 };
-commands[? "a"] = function(_value) // Angle
+commands[$ "a"] = function(_value) // Angle
 { 
 	angle = real(_value);
-	nlAngle = angle + 270;
+	nlAngle = -dsin(angle);
 };
-commands[? "r"] = function(_value) // Reset Effects
+commands[$ "r"] = function(_value) // Reset Effects
 { 
 	effect = "normal";
 };
-commands[? "s"] = function(_value) // Shake Effect
+commands[$ "s"] = function(_value) // Shake Effect
 { 
 	effect = "shake";
 	shake = real(_value);
 };
-commands[? "w"] = function(_value) // Wave Effect
+commands[$ "w"] = function(_value) // Wave Effect
 { 
 	effect = "wave";
 	wave = real(_value);
 };
-commands[? "t"] = function(_value) // Speed
+commands[$ "t"] = function(_value) // Speed
 { 
 	spd = real(_value);
 };
-commands[? "c"] = function(_value) // Color
+commands[$ "c"] = function(_value) // Color
 { 
 	var c = real("0x" + _value);
-	return ((c >> 16) & 0xFF) | (c & 0xFF00) | ((c << 16) &  0xFF0000);
+	color = ((c >> 16) & 0xFF) | (c & 0xFF00) | ((c << 16) &  0xFF0000);
 };
-commands[? "f"] = function(_value) // Font
+commands[$ "f"] = function(_value) // Font
 { 
 	var f = variable_global_get(_value);
 	font = f.font;
 	sprite = f.sprite;
 };
-commands[? "x"] = function(_value) // Scale
+commands[$ "x"] = function(_value) // Scale
 { 
 	xscale = real(_value);
 	yscale = real(_value);
 };
-commands[? "n"] = function(_value) // New Line
+commands[$ "n"] = function(_value) // New Line
 { 
 	var _indent = _value;
 	var _indentLength = string_length(_indent);
@@ -88,7 +88,7 @@ function queueCommands()
 		_startPos = _cmdStart - 1;
 		
 		i++;
-		if (!ds_map_exists(commands, _cmd))
+		if (!variable_struct_exists(commands, _cmd))
 		{
 			if (_cmd == CMD_START)
 			{
@@ -118,7 +118,7 @@ function commandCheck()
 		if ((progress + 1) != head.pos) 
 			return;
 		
-		commands[? head.name](head.value);
+		commands[$ head.name](head.value);
 		ds_queue_dequeue(commandsQueue);	
 	}
 }
@@ -133,23 +133,40 @@ function setPos(_x, _y)
 		y = writerY + yOffset;	
 	}
 }
-function next() 
+function next(_page) 
 {
-	instance_destroy();
-	
 	with(par_letter)
 		if (writerId == other.id)
 			instance_destroy();
-
-	ds_queue_destroy(commandsQueue);
 	
-	if (isLast)
+	var _isLast = (_page == array_length(book));
+	if (_isLast)
 	{
-		endfunction();
-		return;
+		instance_destroy();
+		exit;
 	}
-		
-	write(x, y, pages, spd, fontstruct, sound, color, [xscale, yscale], [hsep, vsep,], monospace, functions, endfunction, page + 1, depth)
+	
+	isOver = false;
+	progress = 0;
+	xOffset = 0;
+	yOffset = 0;
+
+	ds_queue_clear(commandsQueue);
+	
+	message = book[_page];
+
+	queueCommands();
+	commandCheck();
+	
+	length = string_length(message);
+
+	if (!pause)
+		event_perform(ev_alarm, 0)
+	else 
+		alarm[0] = spd + pause
+	
+	alarm[1] = -1;
+	alarm[2] = 1;
 }
 function skip() 
 {
@@ -167,14 +184,4 @@ function skip()
 
 #endregion
 
-message = pages[page];
-
-queueCommands();
-commandCheck();
-
-isLast = (page >= array_length(pages) - 1);
-length = string_length(message);
-	
-alarm[0] = spd + pause;
-alarm[1] = -1;
-alarm[2] = -1 + (2 * canSkip);
+next(page);
