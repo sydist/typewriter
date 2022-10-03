@@ -8,7 +8,7 @@
     {"id":{"name":"snd_nothing","path":"sounds/snd_nothing/snd_nothing.yy",},"order":4,},
     {"id":{"name":"par_letter","path":"objects/par_letter/par_letter.yy",},"order":5,},
     {"id":{"name":"GAME","path":"rooms/GAME/GAME.yy",},"order":2,},
-    {"id":{"name":"spr_8BitoperatorJVE","path":"sprites/spr_8BitoperatorJVE/spr_8BitoperatorJVE.yy",},"order":0,},
+    {"id":{"name":"spr_8bitoperator_JVE","path":"sprites/spr_8bitoperator_JVE/spr_8bitoperator_JVE.yy",},"order":0,},
     {"id":{"name":"obj_letter_wave","path":"objects/obj_letter_wave/obj_letter_wave.yy",},"order":4,},
     {"id":{"name":"write","path":"scripts/write/write.yy",},"order":2,},
     {"id":{"name":"obj_letter_shake","path":"objects/obj_letter_shake/obj_letter_shake.yy",},"order":3,},

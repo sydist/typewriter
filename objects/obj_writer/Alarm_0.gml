@@ -4,9 +4,7 @@ pause = 0;
 progress++;
 
 var _char = string_copy(message, progress, 1);
-var _charCode = ord(_char);
-
-if (_charCode > 32) 
+if (ord(_char) > 32) 
 {
 	instance_create_depth(x + xOffset, y + yOffset, depth, asset_get_index("obj_letter_" + effect), 
 	{
@@ -32,8 +30,12 @@ if (_charCode > 32)
 }
 
 draw_set_font(font);
-xOffset += (((string_width(_char) * xscale) * !monospace) + (hsep * xscale)) * dcos(angle)
-yOffset += (((string_height(_char) * yscale) * !monospace) + (vsep * yscale)) * -dsin(angle)
+
+var _charWidth = string_width(_char) * xscale * !monospace;
+var _charHeight = string_height(_char) * yscale * !monospace;
+
+xOffset += (_charWidth + (hsep * xscale)) * dcos(angle);
+yOffset += (_charHeight + (vsep * yscale)) * -dsin(angle);
 
 commandCheck();
 

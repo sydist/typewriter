@@ -1,5 +1,7 @@
-function write(_x, _y, _str, _spd, _fnt, _snd, _clr = 0xffffff, _xyscale = [1, 1], _hvsep = [0, 0], _mono = false, _func = [], _endfunc = function(){}, _page = 0, _depth = depth) {
-	return instance_create_depth(_x, _y, _depth, obj_writer, {
+function write(_x, _y, _str, _spd, _fnt, _snd, _clr = 0xffffff, _xyscale = [1, 1], _hvsep = [0, 0], _mono = false, _func = [], _endfunc = function(){}, _page = 0, _depth = depth) 
+{
+	return instance_create_depth(_x, _y, _depth, obj_writer, 
+	{
 		book: _str,
 		page: _page,
 		spd: _spd,
@@ -11,7 +13,6 @@ function write(_x, _y, _str, _spd, _fnt, _snd, _clr = 0xffffff, _xyscale = [1, 1
 		vsep: _hvsep[1],
 		
 		sound: _snd ?? snd_nothing,
-		fontstruct: _fnt,
 		font: _fnt.font,
 		sprite: _fnt.sprite,
 		color: _clr,
@@ -31,6 +32,8 @@ function Font(_sprite, _prop, _sep, _charmap = ASCII) constructor
 	sprite = _sprite;
 }
 
-global.FONTS = {
-	main: new Font(spr_8BitoperatorJVE, true, 1),
+global.FONTS = 
+{
+	main: new Font(spr_8bitoperator_JVE, true, 1),
 };
+
