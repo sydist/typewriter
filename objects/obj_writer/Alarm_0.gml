@@ -30,7 +30,6 @@ if (ord(_char) > 32)
 }
 
 draw_set_font(font);
-
 var _charWidth = string_width(_char) * xscale * !monospace;
 var _charHeight = string_height(_char) * yscale * !monospace;
 
@@ -40,11 +39,4 @@ yOffset += (_charHeight + (vsep * yscale)) * -dsin(angle);
 commandCheck();
 
 isOver = (progress >= length);
-if (isOver)
-{	
-	alarm[1] = 1;
-	alarm[2] = -1;
-	exit;
-}
-
-alarm[0] = spd + pause;
+alarm[0] = (spd + pause) * !isOver;

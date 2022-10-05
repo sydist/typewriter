@@ -1,4 +1,7 @@
 {
+  "resourceType": "GMSound",
+  "resourceVersion": "1.0",
+  "name": "v_default",
   "conversionMode": 0,
   "compression": 0,
   "volume": 1.0,
@@ -17,8 +20,4 @@
     "name": "Typewriter",
     "path": "folders/Typewriter.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "v_default",
-  "tags": [],
-  "resourceType": "GMSound",
 }

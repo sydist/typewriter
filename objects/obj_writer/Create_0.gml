@@ -163,15 +163,12 @@ function next(_page)
 	if (!pause)
 		event_perform(ev_alarm, 0)
 	else 
-		alarm[0] = spd + pause
-	
-	alarm[1] = -1;
-	alarm[2] = 1;
+		alarm[0] = pause
 }
 function skip() 
 {
 	pause = 0;
-	alarm[0] = 0;
+	alarm[0] = -1;
 	
 	repeat(length - progress) 
 		event_perform(ev_alarm, 0);
