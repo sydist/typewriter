@@ -1,7 +1,11 @@
 {
+  "resourceType": "GMObject",
+  "resourceVersion": "1.0",
+  "name": "obj_letter",
   "spriteId": null,
   "solid": false,
   "visible": false,
+  "managed": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": null,
@@ -24,8 +28,4 @@
     "name": "Letters",
     "path": "folders/Typewriter/Letters.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "par_letter",
-  "tags": [],
-  "resourceType": "GMObject",
 }

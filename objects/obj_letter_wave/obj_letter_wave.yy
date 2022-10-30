@@ -1,4 +1,7 @@
 {
+  "resourceType": "GMObject",
+  "resourceVersion": "1.0",
+  "name": "obj_letter_wave",
   "spriteId": null,
   "solid": false,
   "visible": true,
@@ -6,8 +9,8 @@
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "par_letter",
-    "path": "objects/par_letter/par_letter.yy",
+    "name": "obj_letter",
+    "path": "objects/obj_letter/obj_letter.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -22,7 +25,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -30,8 +33,4 @@
     "name": "Letters",
     "path": "folders/Typewriter/Letters.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "obj_letter_wave",
-  "tags": [],
-  "resourceType": "GMObject",
 }

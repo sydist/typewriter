@@ -1,4 +1,4 @@
 endfunction();
 
 delete commands
-ds_queue_destroy(commandsQueue)
+ds_queue_destroy(commands_queue)

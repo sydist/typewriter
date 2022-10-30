@@ -1,12 +1,16 @@
 {
+  "resourceType": "GMObject",
+  "resourceVersion": "1.0",
+  "name": "obj_letter_normal",
   "spriteId": null,
   "solid": false,
   "visible": true,
+  "managed": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "par_letter",
-    "path": "objects/par_letter/par_letter.yy",
+    "name": "obj_letter",
+    "path": "objects/obj_letter/obj_letter.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -27,8 +31,4 @@
     "name": "Letters",
     "path": "folders/Typewriter/Letters.yy",
   },
-  "resourceVersion": "1.0",
-  "name": "obj_letter_normal",
-  "tags": [],
-  "resourceType": "GMObject",
 }

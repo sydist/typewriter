@@ -1,3 +1,2 @@
-x = (writerX + xOffset) + random_range(-shake, shake);
-y = (writerY + yOffset) + random_range(-shake, shake);
-
+x = (writer_x + x_offset) + random_range(-shake, shake);
+y = (writer_y + y_offset) + random_range(-shake, shake);

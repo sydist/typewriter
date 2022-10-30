@@ -1,24 +1,38 @@
-function write(_x, _y, _str, _spd, _fnt, _snd, _clr = 0xffffff, _xyscale = [1, 1], _hvsep = [0, 0], _mono = false, _func = [], _endfunc = function(){}, _page = 0, _depth = depth) 
+/// @param {real} x
+/// @param {real} y
+/// @param {Array<String>} strings 
+/// @param {real} speed
+/// @param {struct.font} font_struct
+/// @param {asset.GMSound} voice
+/// @param {real} [color]=0xffffff
+/// @param {array<real>} [scale]=[1, 1]
+/// @param {array<real>} [seperation]=[0, 0]
+/// @param {bool} [monospace]=false
+/// @param {array<function>} [functions]=[] 
+/// @param {function} [end_function]=function(){}
+/// @param {real} [page]=0
+/// @returns {Id.Instance}
+function write(x, y, strings, speed, font_struct, voice, color = 0xffffff, scale = [1, 1], seperation = [0, 0], monospace = false, functions = [], end_function = function(){}, page = 0) 
 {
-	return instance_create_depth(_x, _y, _depth, obj_writer, 
+	return instance_create_depth(x, y, depth, obj_writer, 
 	{
-		book: _str,
-		page: _page,
-		spd: _spd,
+		book: strings,
+		page: page,
+		spd: speed,
 		
-		xscale: _xyscale[0],
-		yscale: _xyscale[1],
-		monospace: _mono,
-		hsep: _hvsep[0],
-		vsep: _hvsep[1],
+		xscale: scale[0],
+		yscale: scale[1],
+		monospace: monospace,
+		hsep: seperation[0],
+		vsep: seperation[1],
 		
-		sound: _snd ?? snd_nothing,
-		font: _fnt.font,
-		sprite: _fnt.sprite,
-		color: _clr,
+		sound: voice ?? snd_nothing,
+		font: font_struct.font,
+		sprite: font_struct.sprite,
+		color: color,
 		
-		functions: _func,
-		endfunction: _endfunc,
+		functions: functions,
+		endfunction: end_function,
 	});
 }
 
@@ -26,14 +40,18 @@ function write(_x, _y, _str, _spd, _fnt, _snd, _clr = 0xffffff, _xyscale = [1, 1
 #macro CMD_BREAK "]"
 #macro ASCII " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
 
-function Font(_sprite, _prop, _sep, _charmap = ASCII) constructor 
+/// @param {asset.GMSprite} sprite_map
+/// @param {bool} proportional
+/// @param {real} seperation
+/// @param {string} [character_map]
+function Font(sprite_map, proportional, seperation, character_map = ASCII) constructor 
 {
-	font = font_add_sprite_ext(_sprite, _charmap, _prop, _sep);
-	sprite = _sprite;
+	font = font_add_sprite_ext(sprite_map, character_map, proportional, seperation);
+	sprite = sprite_map;
 }
 
-global.FONTS = 
+global.fonts = 
 {
-	main: new Font(spr_8bitoperator_JVE, true, 1),
+	main: new Font(spr_8bitoperator_jve, true, 1),
 };
 
