@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSound",
   "resourceVersion": "1.0",
-  "name": "snd_default_voice",
+  "name": "snd_voice_default",
   "conversionMode": 0,
   "compression": 0,
   "volume": 1.0,
@@ -14,7 +14,7 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "snd_default_voice.wav",
+  "soundFile": "snd_voice_default.wav",
   "duration": 1.714286,
   "parent": {
     "name": "Typewriter",

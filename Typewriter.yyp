@@ -1,10 +1,10 @@
 {
   "resourceType": "GMProject",
   "resourceVersion": "1.6",
-  "name": "Typewriter",
+  "name": "typewriter",
   "resources": [
     {"id":{"name":"obj_letter_normal","path":"objects/obj_letter_normal/obj_letter_normal.yy",},"order":2,},
-    {"id":{"name":"snd_default_voice","path":"sounds/snd_default_voice/snd_default_voice.yy",},"order":1,},
+    {"id":{"name":"snd_voice_default","path":"sounds/snd_voice_default/snd_voice_default.yy",},"order":1,},
     {"id":{"name":"snd_nothing","path":"sounds/snd_nothing/snd_nothing.yy",},"order":4,},
     {"id":{"name":"obj_letter","path":"objects/obj_letter/obj_letter.yy",},"order":5,},
     {"id":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},"order":2,},

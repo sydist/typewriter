@@ -14,6 +14,14 @@ show_debug_overlay(true);
 // -------
 // example
 // -------
-write(10, 30, [ "[s1]Hello [w1][p60][n]World!", "[w1]THE ONE PIEEECE...[p60][n][s1]THE ONE PIECE IS [s2][x2][cff0000]REAL!" ], 3, global.fonts.main, snd_default_voice, c_white, [1, 1], [0, 0], false, [], function() {
-	game_end();
-});
+texts = [ "[x2]L[r][x1]orem ipsum dolor sit amet,[n00][p30][s1]consectetur adipiscing elit.[r][p60][n][w1]Ut ut nisl nibh.[p60]  Nunc auctor ipsum ex,[p30][n][r][cff0000][t15]non [t3][cffffff]condimentum nunc rutrum et.[p60][n]Aliquam moll-  [>0]" ];
+write(
+	10, 30, 
+	texts, 3, 
+	global.fonts.main, 
+	snd_voice_default, 
+	c_white, 
+	[1, 1], 
+	[0, 0], false, 
+	[game_end]
+);

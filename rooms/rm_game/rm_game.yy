@@ -44,7 +44,7 @@
     "PhysicsWorldPixToMetres": 0.1,
   },
   "parent": {
-    "name": "Typewriter",
-    "path": "Typewriter.yyp",
+    "name": "typewriter",
+    "path": "typewriter.yyp",
   },
 }
